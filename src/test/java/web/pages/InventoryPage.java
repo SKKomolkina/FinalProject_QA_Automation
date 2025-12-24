@@ -20,6 +20,8 @@ public class InventoryPage {
     private By addToCartButton = By.id("add-to-cart-sauce-labs-backpack");
     private By cartBadge = By.className("shopping_cart_badge");
 
+    private By shoppingCartLink = By.className("shopping_cart_link");
+
     public InventoryPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -49,12 +51,14 @@ public class InventoryPage {
     }
 
     public String getCartItemsCount() {
-        // Создаем объект ожидания
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 
-        // Ждем появления элемента в DOM и его видимости
         WebElement badge = wait.until(ExpectedConditions.visibilityOfElementLocated(cartBadge));
 
         return badge.getText();
+    }
+
+    public void goToCart() {
+        driver.findElement(shoppingCartLink).click();
     }
 }
